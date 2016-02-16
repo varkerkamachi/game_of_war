@@ -21,8 +21,12 @@ module CardFuncs
   end
 
   # returns array of cards played, ranked in descending order
-  def rank_cards_played cards=[]
-    return false if cards.blank?
-    cards = cards.sort{|a,b| CARD_VALUES[b.face_value] <=> CARD_VALUES[a.face_value]}
+  def rank_cards_played cards
+    return cards unless cards.is_a?(Array)
+    cards = cards.sort{|a,b| CARD_VALUES[b.try(:face_value)] <=> CARD_VALUES[a.try(:face_value)]}
+  end
+
+  def player_with_highest_card_count players=[]
+    players.sort{|a,b| b.num_cards_remaining <=> a.num_cards_remaining}.try(:first)
   end
 end
