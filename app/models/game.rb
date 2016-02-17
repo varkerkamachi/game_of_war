@@ -27,7 +27,7 @@ class Game
   ]
 
   def initialize num_cards_per_war=1, num_players=2, players = []
-    @num_players = num_players
+    @num_players = num_players > 4 ? 4 : num_players
     @players = []
     @players = players.blank? ? get_players : players
     @state = 'stop'
@@ -168,7 +168,7 @@ class Game
     get_winning_player
     puts "================        =====================      ==================="
     puts "-------------------- GAME OVER! ______________________________________"
-    puts "____________________WINNER: #{get_winning_player.try(:name)} --------------------------"
+    puts "____________________ WINNER: #{get_winning_player.try(:name)} --------------------------"
     puts "================        =====================      ==================="
     # write stats/scores to dB ...
   end
